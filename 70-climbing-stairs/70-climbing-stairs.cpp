@@ -11,10 +11,6 @@ public:
         if(dp[n]!=0){
             return dp[n];
         }
-        int ans=0;
-        for(int i=1;i<=2;i++){
-            ans+=climbStairs(n-i);
-        }
-        return dp[n]=ans;
+        return dp[n]=climbStairs(n-1)+climbStairs(n-2);
     }
 };
