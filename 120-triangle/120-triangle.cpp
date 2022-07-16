@@ -1,19 +1,33 @@
 class Solution {
 public:
     int minimumTotal(vector<vector<int>>& triangle) {
+        // int n=triangle.size();
+        // vector<vector<int>> dp(n,vector<int> (n,0));
+        // for(int i=0;i<n;i++){
+        //     dp[n-1][i]=triangle[n-1][i];
+        // }
+        // for(int i=n-2;i>=0;i--){
+        //     for(int j=i;j>=0;j--){
+        //         int down = triangle[i][j] + dp[i+1][j];
+        //         int diagnol = triangle[i][j] + dp[i+1][j+1];
+        //         dp[i][j] = min(down,diagnol);
+        //     }
+        // }
+        // return dp[0][0];
         int n=triangle.size();
-        vector<vector<int>> dp(n,vector<int> (n,0));
+        vector<int> front(n,0),curr(n,0);
         for(int i=0;i<n;i++){
-            dp[n-1][i]=triangle[n-1][i];
+            front[i]=triangle[n-1][i];
         }
         for(int i=n-2;i>=0;i--){
             for(int j=i;j>=0;j--){
-                int down = triangle[i][j] + dp[i+1][j];
-                int diagnol = triangle[i][j] + dp[i+1][j+1];
-                dp[i][j] = min(down,diagnol);
+                int down = triangle[i][j] + front[j];
+                int diagnol = triangle[i][j] + front[j+1];
+                curr[j] = min(down,diagnol);
             }
+            front = curr;
         }
-        return dp[0][0];
+        return front[0];
     }
     //     int helper(vector<vector<int>> &triangle,int i,int j,vector<vector<int>>& dp){
     //     if(j==triangle.size()-1){
