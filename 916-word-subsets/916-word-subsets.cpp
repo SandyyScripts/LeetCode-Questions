@@ -2,7 +2,7 @@ class Solution {
 public:
     bool check(string y,unordered_map<char,int> mp){
         for(auto &x:y){
-            if(mp[x]>0) mp[x]--;
+            if(mp[x]) mp[x]--;
         }
         for(auto &x:mp){
             // cout<<x.second<<" ";
